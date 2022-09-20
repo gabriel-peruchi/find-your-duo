@@ -24,7 +24,6 @@ interface GameCardProps extends TouchableOpacityProps {
 }
 
 export function GameCard({ data, ...rest }: GameCardProps) {
-  console.log(data)
   return (
     <TouchableOpacity style={styles.container} {...rest}>
       <ImageBackground
