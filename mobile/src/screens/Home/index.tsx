@@ -1,13 +1,20 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { View, Image, FlatList } from 'react-native'
 
 import { styles } from './styles'
-import { GAMES } from '../../utils/games'
 import { Heading } from '../../components/Heading'
-import { GameCard } from '../../components/GameCard'
+import { Game, GameCard } from '../../components/GameCard'
 import logoImage from '../../assets/logo-nlw-esports.png'
 
-
 export function Home() {
+  const [games, setGames] = useState<Game[]>([])
+
+  useEffect(() => {
+    axios.get<Game[]>('http://localhost:3333/games')
+      .then(({ data }) => setGames(data))
+  }, [])
+
   return (
     <View style={styles.container}>
       <Image
@@ -22,7 +29,7 @@ export function Home() {
 
       <FlatList
         horizontal
-        data={GAMES}
+        data={games}
         keyExtractor={item => item.id}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.contentList}
