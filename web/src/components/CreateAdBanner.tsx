@@ -1,4 +1,5 @@
 import { MagnifyingGlassPlus } from 'phosphor-react'
+import { DialogTrigger } from '@radix-ui/react-dialog'
 
 export function CreateAdBanner() {
   return (
@@ -9,10 +10,10 @@ export function CreateAdBanner() {
           <span className="text-zinc-400 block">Publique um anúncio para encontrar novos players!</span>
         </div>
 
-        <button className="py-3 px-4 bg-violet-500 text-white rounded flex items-center gap-3 hover:bg-violet-600 transition-colors">
+        <DialogTrigger className="py-3 px-4 bg-violet-500 text-white rounded flex items-center gap-3 hover:bg-violet-600 transition-colors">
           <MagnifyingGlassPlus size={24} />
           Publicar anúncio
-        </button>
+        </DialogTrigger>
       </div>
     </div>
   )

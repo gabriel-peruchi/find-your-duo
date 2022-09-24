@@ -3,10 +3,13 @@ import './styles/main.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
+import * as Dialog from '@radix-ui/react-dialog'
+
 import { Game } from './types/Game'
-import logoImg from './assets/logo-nlw-esports.svg'
 import { GameCard } from './components/GameCard'
+import logoImg from './assets/logo-nlw-esports.svg'
 import { CreateAdBanner } from './components/CreateAdBanner'
+import { CreateAdDialog } from './components/CreateAdDialog'
 
 function App() {
   const [games, setGames] = useState<Game[]>([])
@@ -37,7 +40,10 @@ function App() {
         }
       </div>
 
-      <CreateAdBanner />
+      <Dialog.Root>
+        <CreateAdBanner />
+        <CreateAdDialog />
+      </Dialog.Root>
     </div>
   )
 }
