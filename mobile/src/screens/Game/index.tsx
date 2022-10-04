@@ -12,9 +12,11 @@ import { Ad, DuoCard } from '../../components/DuoCard'
 import { Background } from '../../components/Background'
 import logoImage from '../../assets/logo-nlw-esports.png'
 import { Game as GameProps } from '../../components/GameCard'
+import { DuoMatchDialog } from '../../components/DuoMatchDialog'
 
 export function Game() {
   const [ads, setAds] = useState<Ad[]>([])
+  const [discordSelected, setDiscordSelected] = useState<string | null>(null)
 
   const route = useRoute()
   const navigation = useNavigation()
@@ -28,6 +30,13 @@ export function Game() {
 
   function handleGoBack() {
     navigation.goBack()
+  }
+
+  async function getDiscordUser(adId: string) {
+    const response = await axios.get(`http://localhost:3333/ads/${adId}/discord`)
+    const { discord } = response.data
+
+    setDiscordSelected(discord)
   }
 
   return (
@@ -71,7 +80,7 @@ export function Game() {
           renderItem={({ item }) => (
             <DuoCard 
               data={item}
-              onConnect={() => {}}
+              onConnect={() => getDiscordUser(item.id)}
             />
           )}
           ListEmptyComponent={() => (
@@ -79,6 +88,12 @@ export function Game() {
               Não há anúncios publicados ainda.
             </Text>
           )}
+        />
+
+        <DuoMatchDialog
+          visible={!!discordSelected}
+          discord={discordSelected as string}
+          onClose={() => setDiscordSelected(null)}
         />
       </SafeAreaView>
     </Background>

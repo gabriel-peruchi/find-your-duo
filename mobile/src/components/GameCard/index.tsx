@@ -3,7 +3,6 @@ import {
   Text,
   ImageBackground,
   TouchableOpacity,
-  ImageSourcePropType,
   TouchableOpacityProps
 } from 'react-native'
 import { THEME } from '../../theme'
